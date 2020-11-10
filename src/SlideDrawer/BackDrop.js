@@ -1,13 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './BackDrop.css';
 
-class BackDrop extends Component {
-	render() {
-		return(
-			<div className="backdrop"
-				onClick={this.props.close}
-			/>
-		);
-	}
+function BackDrop({close}) {
+	return(
+		<div className="backdrop" onClick={close} />
+	);
 }
 export default BackDrop;

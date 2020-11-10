@@ -3,22 +3,16 @@ import React, { Component } from 'react';
 class Canvas extends Component {
 	constructor(props) {
 		super(props);
-		this.state = {
-			stageWidth: window.innerWidth,
-			stageHeight: window.innerHeight,
-		}
 		this.canvasRef = React.createRef();
 		this.ctx = null;
-		window.addEventListener('resize', this.handleResize.bind(this), false);
-	}
-	handleResize = () => {
-		if (this._ismount)
-			this.setState({stageWidth: window.innerWidth, stageHeight: window.innerHeight});
+		this.tacks = [];
+		this.startX = 0;
+		this.startY = 0;
 	}
 	draw = () => {
 		this.ctx.beginPath();
 		this.ctx.fillStyle = '#81d8e6';
-		this.ctx.fillRect(0, 0, this.state.stageWidth, this.state.stageHeight);
+		this.ctx.fillRect(0, 0, this.props.stageWidth, this.props.stageHeight);
 		this.ctx.closePath();
 	}
 	componentDidMount() {
@@ -28,79 +22,48 @@ class Canvas extends Component {
 	componentDidUpdate() {
 		this.draw();
 	}
+	create = (e) => {
+		// this.ctx.beginPath();
+		// this.ctx.fillStyle = '#ff0000';
+		// this.ctx.arc(e.clientX, e.clientY, 10, 0, Math.PI * 2, false);
+		// this.ctx.fill();
+		this.tacks.push({x:e.clientX, y:e.clientY});
+
+		this.ctx.beginPath();
+		this.ctx.strokeStyle = '#ffffff';
+		if (this.tacks.length === 1) {
+			this.startX = this.tacks[0].x;
+			this.startY = this.tacks[0].y;
+		} else {
+			let i = this.tacks.length;
+			this.ctx.moveTo(this.startX, this.startY);
+			this.ctx.lineTo(this.tacks[i - 1].x, this.tacks[i - 1].y);
+			this.ctx.stroke();
+			this.startX = this.tacks[i-1].x;
+			this.startY = this.tacks[i-1].y;
+		}
+		const btn = document.createElement('button');
+		document.getElementById('my_canvas').appendChild(btn);
+		btn.style.position = 'absolute';
+		btn.style.top = e.clientY + 'px';
+		btn.style.left = e.clientX + 'px';
+		btn.style.backgroundColor = '#0a4180';
+		btn.style.color = 'white';
+		btn.innerHTML = 'TPRI';
+		btn.onclick = this.props.open;
+	}
 	render() {
 		return (
-			<div>
+			<div id="my_canvas">
 				<canvas
 				ref={this.canvasRef}
-				width={this.state.stageWidth}
-				height={this.state.stageHeight}
-				onClick={this.props.toggle}
+				width={this.props.stageWidth}
+				height={this.props.stageHeight}
+				onClick={this.create}
 				/>
 			</div>
 		);
 	}
 }
 
-// const Canvas = () => {
-// 	const handleClick = (e) => {
-// 		console.log(e.clientX);
-// 		console.log(e.clientY);
-// 	}
-// 	const handleResize = () => {
-// 		setWidth(window.innerWidth);
-// 		setHeight(window.innerHeight);
-// 	}
-// 	// useState() 사용하기 위해 function components로 변경함.
-// 	const [stageWidth, setWidth] = React.useState(window.innerWidth);
-// 	const [stageHeight, setHeight] = React.useState(window.innerHeight);
-// 	const canvasRef = React.createRef();
-// 	const canvas = canvasRef.current;
-// 	const ctx = canvas.getContext('2d');
-// 	window.addEventListener('resize', handleResize, false);
-// 	return (
-// 		<div>
-// 			<canvas
-// 			ref={canvasRef}
-// 			width={stageWidth}
-// 			height={stageHeight}
-// 			onClick={handleClick}
-// 			/>
-// 		</div>
-// 	);
-// }
-
 export default Canvas;
-
-
-// import React, { useState } from 'react';
-
-// function Canvas() {
-// 	const handleClick = (e) => {
-// 		console.log(e.clientX);
-// 		console.log(e.clientY);
-// 	}
-// 	const handleResize = () => {
-// 		setWidth(window.innerWidth);
-// 		setHeight(window.innerHeight);
-// 	}
-// 	// useState() 사용하기 위해 function components로 변경함.
-// 	const [stageWidth, setWidth] = React.useState(window.innerWidth);
-// 	const [stageHeight, setHeight] = React.useState(window.innerHeight);
-// 	const canvasRef = React.createRef();
-// 	const canvas = canvasRef.current;
-// 	const ctx = canvas.getContext('2d');
-// 	window.addEventListener('resize', handleResize, false);
-// 	return (
-// 		<div>
-// 			<canvas
-// 			ref={canvasRef}
-// 			width={stageWidth}
-// 			height={stageHeight}
-// 			onClick={handleClick}
-// 			/>
-// 		</div>
-// 	);
-// }
-
-// export default Canvas;
