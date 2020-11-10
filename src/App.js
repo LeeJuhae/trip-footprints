@@ -7,11 +7,16 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-			stageWidth: window.innerWidth,
-			stageHeight: window.innerHeight,
+      stageWidth: document.body.clientWidth,
+      stageHeight: document.body.clientHeight,
+			// stageWidth: window.innerWidth,
+			// stageHeight: window.innerHeight,
       isOpen: false,
+      tacks: [],
     }
-		window.addEventListener('resize', this.handleResize.bind(this), false);
+		this.pixelRatio = window.devicePixelRatio > 1 ? 2 : 1;
+
+		window.addEventListener('resize', this.resize.bind(this), false);
   }
   openDrawer = () => {
     this.setState({
@@ -23,9 +28,10 @@ class App extends Component {
       isOpen: false
     })
   }
-	handleResize = () => {
-		if (this._ismount)
+	resize = () => {
+		if (this._ismount) {
       this.setState({stageWidth: window.innerWidth, stageHeight: window.innerHeight});
+    }
   }
   componentDidMount() {
     this._ismount = true;
@@ -36,9 +42,10 @@ class App extends Component {
         <SlideDrawer isOpen={this.state.isOpen}/>
         {this.state.isOpen && <BackDrop close={this.closeDrawer}/>}
         <Canvas
-          stageWidth={this.state.stageWidth}
-          stageHeight={this.state.stageHeight}
+          width={this.state.stageWidth*this.pixelRatio}
+          height={this.state.stageHeight*this.pixelRatio}
           open={this.openDrawer}
+          tacks={this.state.tacks}
           />
       </div>
     );
