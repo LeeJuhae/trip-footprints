@@ -9,8 +9,6 @@ class App extends Component {
     this.state = {
       stageWidth: document.body.clientWidth,
       stageHeight: document.body.clientHeight,
-			// stageWidth: window.innerWidth,
-			// stageHeight: window.innerHeight,
       isOpen: false,
       tacks: [],
     }
@@ -19,14 +17,18 @@ class App extends Component {
 		window.addEventListener('resize', this.resize.bind(this), false);
   }
   openDrawer = () => {
-    this.setState({
-      isOpen: true
-    })
+    if (this._ismount) {
+      this.setState({
+        isOpen: true
+      })
+    }
   }
   closeDrawer = () => {
-    this.setState({
-      isOpen: false
-    })
+    if (this._ismount) {
+      this.setState({
+        isOpen: false
+      })
+    }
   }
 	resize = () => {
 		if (this._ismount) {
@@ -46,7 +48,7 @@ class App extends Component {
           height={this.state.stageHeight*this.pixelRatio}
           open={this.openDrawer}
           tacks={this.state.tacks}
-          />
+        />
       </div>
     );
   }
