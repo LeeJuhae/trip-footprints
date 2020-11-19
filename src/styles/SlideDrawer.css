@@ -1,0 +1,88 @@
+html {
+	height: 100%;
+}
+body {
+	margin: 0;
+	padding: 0;
+	height: 100% ;
+}
+.side-drawer {
+	display: flex;
+	background-color: white;
+	position: fixed;
+	top: 15%;
+	height: 70%;
+	right: 0%;
+	width: 100%;
+	z-index: 200;
+	box-shadow: 1px 0px 7px rgba(0,0,0,0.5);
+	transform: translateX(100%);
+	transition: transform 0.3s ease-out;
+	text-align: center;
+}
+.side-drawer.open {
+	transform: translateX(0);
+}
+
+#gallery {
+	text-align: center;
+	width: 60%;
+	margin: 10px;
+	overflow: hidden;
+	overflow-y: scroll;
+}
+
+#slide-pic {
+	max-width: 600px;
+	margin: 0 auto;
+}
+
+#controller {
+	width: 40%;
+	margin: 10px;
+	font-family: 'Courier New', Courier, monospace;
+	text-align: center;
+	overflow: hidden;
+	overflow-y: scroll;
+}
+
+#wrap-text {
+	height: 40px;
+	padding: 10px;
+	max-width: 300px;
+	margin: 0 auto;
+}
+
+#wrap-form {
+	padding: 10px;
+	height: calc(100% - 80px);
+	max-width: 300px;
+	margin: 0 auto;
+
+}
+
+#file-selector {
+	color: white;
+	background-color: rgb(176, 68, 64);
+	height: 22px;
+}
+
+#file-list {
+	overflow-y: scroll;
+	height: calc(100% - 214px);
+	margin: 10px;
+}
+
+#file-ul {
+	padding-inline-start: 10px;
+}
+#fb-btn {
+	color: white;
+	background-color: rgb(176, 68, 64);
+	font: inherit;
+	padding: 10px;
+	border: 0;
+	outline: 0;
+	height: 38px;
+
+}

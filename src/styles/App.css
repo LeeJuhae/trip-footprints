@@ -1,0 +1,49 @@
+div {
+  display: block;
+}
+
+h1{
+  margin: 0;
+  font-size: calc(30px + 1vmin);
+  font-weight: normal;
+}
+
+h2 {
+  margin: 0;
+  font-size: calc(10px + 1vmin);
+  font-weight: normal;
+
+}
+
+.wrap-head {
+  height: 60px;
+  padding: 0 40px;
+}
+
+.link-tpri {
+  float: left;
+  text-decoration: none;
+  color: black;
+  font-family: 'Courier New', Courier, monospace;
+  height: 60px;
+  line-height: 60px;
+}
+
+.link-signin {
+  float: right;
+  text-decoration: none;
+  color: black;
+  font-family: 'Courier New', Courier, monospace;
+  height: 60px;
+  line-height: 60px;
+}
+
+.link-signout {
+  float: right;
+  text-decoration: none;
+  color: black;
+  margin-left: 20px;
+  font-family: 'Courier New', Courier, monospace;
+  height: 60px;
+  line-height: 60px;
+}

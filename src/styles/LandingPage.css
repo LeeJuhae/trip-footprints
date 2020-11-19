@@ -1,0 +1,25 @@
+#wrap-landingpage {
+	margin-top: 100px;
+	height: 50vmin;
+	display: block;
+	text-align: center;
+}
+
+#logo {
+	height: 20vmin;
+}
+
+#slogan {
+	margin-top: 20px;
+	font-size: 5rem;
+	font-family: 'Courier New', Courier, monospace;
+}
+/*
+.video {
+	position: "absolute",
+	left: "50%",
+	top: "50%",
+	right: "auto",
+	bottom: "auto",
+	transform: "translate(-50%, -50%)",
+} */
