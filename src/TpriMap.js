@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PreCanvas from './pre_Canvas';
 import Canvas from './Canvas';
 import SlideDrawer from './SlideDrawer';
 import BackDrop from './BackDrop';
