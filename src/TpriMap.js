@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PreCanvas from './pre_Canvas';
 import Canvas from './Canvas';
 import SlideDrawer from './SlideDrawer';
 import BackDrop from './BackDrop';
@@ -7,20 +8,20 @@ class TpriMap extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      stageWidth: document.body.clientWidth,
-      stageHeight: document.body.clientHeight,
       isOpen: false,
-      tacks: [],
+      lat: -1,
+      lng: -1,
     }
-		this.pixelRatio = window.devicePixelRatio > 1 ? 2 : 1;
-
-		window.addEventListener('resize', this.resize.bind(this), false);
+		// this.pixelRatio = window.devicePixelRatio > 1 ? 2 : 1;
   }
-  openDrawer = (e) => {
+
+  openDrawer = (latlng) => {
     if (this._ismount) {
       this.setState({
         ...this.state,
         isOpen: true,
+        lat: latlng.Ma,
+        lng: latlng.La
       })
     }
   }
@@ -32,30 +33,20 @@ class TpriMap extends Component {
       })
     }
   }
-	resize = () => {
-		if (this._ismount) {
-      this.setState({
-        ...this.state,
-        stageWidth: window.innerWidth,
-        stageHeight: window.innerHeight});
-    }
-  }
+
   componentDidMount() {
     this._ismount = true;
   }
   render(){
     return (
       <div>
-        <SlideDrawer isOpen={this.state.isOpen}/>
-        {this.state.isOpen && <BackDrop close={this.closeDrawer}/>}
-        <Canvas
-          width={this.state.stageWidth}
-          height={this.state.stageHeight}
-          // width={this.state.stageWidth*this.pixelRatio}
-          // height={this.state.stageHeight*this.pixelRatio}
-          open={this.openDrawer}
-          tacks={this.state.tacks}
-        />
+        {localStorage.getItem('id') === "" ? window.location.href='/'
+        :
+        <div style={{position: "relative"}}>
+          <SlideDrawer isOpen={this.state.isOpen} lat={this.state.lat} lng={this.state.lng}/>
+          {this.state.isOpen && <BackDrop close={this.closeDrawer}/>}
+          <Canvas open={this.openDrawer}/>
+        </div>}
       </div>
     );
   }
