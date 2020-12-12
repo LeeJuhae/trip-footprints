@@ -29,21 +29,24 @@ h2 {
   line-height: 60px;
 }
 
-.link-signin {
+.link-map {
   float: right;
   text-decoration: none;
   color: black;
   font-family: 'Courier New', Courier, monospace;
   height: 60px;
   line-height: 60px;
+  margin-right: 30px;
+  cursor: pointer;
+
 }
 
-.link-signout {
+.user-auth {
   float: right;
   text-decoration: none;
   color: black;
-  margin-left: 20px;
   font-family: 'Courier New', Courier, monospace;
   height: 60px;
   line-height: 60px;
+  cursor: pointer;
 }
