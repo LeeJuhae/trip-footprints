@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Route, Link } from 'react-router-dom';
 import TpriMap from './TpriMap';
 import LandingPage from './LandingPage';
