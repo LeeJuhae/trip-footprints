@@ -6,7 +6,7 @@ import './styles/SlideDrawer.css';
 import btn_go_left from './resource/travel-left.svg';
 import btn_go_right from './resource/travel-right.svg';
 
-function SlideDrawer({isOpen, lat, lng}) {
+function SlideDrawer({isOpen, lat, lng, address}) {
 	const user_id = localStorage.getItem('id');
 
 	const [imageAsFiles, setImageAsFile] = useState([]);
@@ -132,7 +132,7 @@ function SlideDrawer({isOpen, lat, lng}) {
 		<div id="slide-drawer">
 			<div className={imageViewClasses}>
 				<div className="controller">
-					<h1 className="wrap-text">({lat},{lng})</h1>
+					<h2 className="wrap-text">({lat}, {lng})</h2>
 					<input type="date"></input>
 					<br></br>
 					<input type="date"/>
@@ -158,7 +158,7 @@ function SlideDrawer({isOpen, lat, lng}) {
 						/>
 				</div>
 				<div className="controller">
-					<h1 className="wrap-text">({lat},{lng})</h1>
+					<h2 className="wrap-text">({lat}, {lng})</h2>
 					<form onSubmit={handleFireBaseUpload}  id="wrap-form">
 						<MyDropzone swaggerRead={handleImageAsFile} />
 						<div id="file-list">

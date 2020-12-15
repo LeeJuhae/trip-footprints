@@ -7,6 +7,7 @@ function Canvas(props) {
 
 	let [width, setWidth] = useState(window.innerWidth);
 	let [height, setHeight] = useState(window.innerHeight);
+	let address = '';
 
 	let map = null;
 
@@ -16,6 +17,13 @@ function Canvas(props) {
 	};
 
 	window.addEventListener('resize', resize);
+
+	function searchDetailAddrFromCoords(coords, callback) {
+
+		// 좌표로 법정동 상세 주소 정보 요청.
+		const geocoder = new window.kakao.maps.services.Geocoder();
+		geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
+	}
 
 	useEffect(() => {
 		const container = document.getElementById('map');
@@ -30,7 +38,15 @@ function Canvas(props) {
 		// Add event listener on kakao map.
 		// If map is cliked, create a marker(tack) on that location.
 		window.kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
+
 			setTack(mouseEvent.latLng);
+			// 좌표로 주소 알아내기
+			searchDetailAddrFromCoords(mouseEvent.latLng, function(result, status) {
+				if (status === window.kakao.maps.services.Status.OK) {
+					var detailAddr = !!result[0].road_address ? result[0].road_address.address_name : result[0].address.address_name;
+					address = detailAddr;
+				}
+			});
 		})
 		getTacks();
 	}, [width, height]);
@@ -40,9 +56,11 @@ function Canvas(props) {
 			position: map.getCenter(),
 			clickable: true
 		});
+
 		window.kakao.maps.event.addListener(marker, 'click', function(e){
-			props.open(marker.getPosition());
-		})
+			props.open(marker.getPosition(), address);
+		});
+
 		marker.setPosition(latlng);
 		marker.setMap(map);
 

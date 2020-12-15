@@ -10,17 +10,19 @@ class TpriMap extends Component {
       isOpen: false,
       lat: -1,
       lng: -1,
+      address: ''
     }
 		// this.pixelRatio = window.devicePixelRatio > 1 ? 2 : 1;
   }
 
-  openDrawer = (latlng) => {
+  openDrawer = (latlng, address) => {
     if (this._ismount) {
       this.setState({
         ...this.state,
         isOpen: true,
         lat: latlng.Ma,
-        lng: latlng.La
+        lng: latlng.La,
+        address: address
       })
     }
   }
@@ -42,7 +44,7 @@ class TpriMap extends Component {
         {localStorage.getItem('id') === "" ? window.location.href='/'
         :
         <div style={{position: "relative"}}>
-          <SlideDrawer isOpen={this.state.isOpen} lat={this.state.lat} lng={this.state.lng}/>
+          <SlideDrawer isOpen={this.state.isOpen} lat={this.state.lat} lng={this.state.lng} address={this.state.address}/>
           {this.state.isOpen && <BackDrop close={this.closeDrawer}/>}
           <Canvas open={this.openDrawer}/>
         </div>}
